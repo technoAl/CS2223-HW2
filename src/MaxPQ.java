@@ -1,8 +1,20 @@
 public class MaxPQ<T extends Comparable<T>> {
 	private T[] pq; // heap-ordered complete binary tree
 	private int n = 0; // in pq[1..N] with pq[0] unused
+
+	public MaxPQ(){
+		pq = (T[]) new Comparable[1000+1]; // default size 1000
+	}
+
 	public MaxPQ(int maxN) {
 		pq = (T[]) new Comparable[maxN+1];
+	}
+
+	public MaxPQ(T[] a){
+		pq =  (T[]) new Comparable[a.length * 2+1];
+		for (T t : a) {
+			insert(t);
+		}
 	}
 
 	public boolean isEmpty() {
@@ -16,6 +28,10 @@ public class MaxPQ<T extends Comparable<T>> {
 	public void insert(T v) {
 		pq[++n] = v;
 		swim(n);
+	}
+
+	public T max(){
+		return pq[1];
 	}
 
 	public T delMax() {

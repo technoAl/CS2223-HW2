@@ -1,8 +1,15 @@
 public class Competitor implements Comparable<Competitor> {
 	int placing;
+	String name;
 
-	public Competitor(int placing){
+	public Competitor(int placing, String name){
 		this.placing = placing;
+		this.name = name;
+	}
+
+	@Override
+	public String toString(){
+		return name;
 	}
 
 	@Override

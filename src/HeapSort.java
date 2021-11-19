@@ -1,39 +1,51 @@
 public class HeapSort<T extends Comparable<T>>  {
-	T[] arr;
-	int n = 0;
 
-	public HeapSort(T[] arr){ // Constructor
-		this.arr = arr;
+	public HeapSort(){
+
 	}
 
-	public void sort(){ // Sort
+	public static void sort(Comparable[] arr){ // Sort
+		Comparable[] sortingArr  = new Comparable[arr.length+1];
+		for(int i = 0; i < arr.length; i++){
+			sortingArr[i+1] = arr[i];
+		}
+
+
 		int n = arr.length;
 		for(int k = n/2; k >= 1; k--){ // heapify
-			sink(k);
+			sink(sortingArr ,k, n);
 		}
+
 		while(n > 1){ // sort into place
-			swap(1, n--);
-			sink(n);
+			swap(sortingArr,1, n--);
+			sink(sortingArr, 1, n);
+		}
+
+		for(int i = 0; i < arr.length; i++){
+			arr[i] = sortingArr[i+1];
 		}
 	}
 
-	private void sink(int k) {
+	private static void sink(Comparable[] arr, int k, int n) {
 		while(2 * k < n+1 ){
 			int child = 2 * k;
-			if(child + 1 <= n && less(child, child+1)) child++;
-			if(less(k, child)){
-				swap(k, child);
-			}
+			if(child + 1 <= n && less(arr, child, child+1)) child++;
+//			if(less(arr, k, child)){
+//				swap(arr, k, child);
+//			}
+			if (!less(arr, k, child))
+				break;
+			swap(arr, k, child);
 			k = child;
 		}
 	}
 
-	private boolean less(int i, int j) {
+	private static boolean less(Comparable[] arr, int i, int j) {
 		return arr[i].compareTo(arr[j]) < 0;
 	}
 
-	private void swap(int i, int j){
-		T tmp = arr[i];
+	private static void swap(Comparable[] arr, int i, int j){
+		Comparable tmp =  arr[i];
 		arr[i] = arr[j];
 		arr[j] = tmp;
 	}

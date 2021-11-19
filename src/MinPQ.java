@@ -1,8 +1,20 @@
 public class MinPQ<T extends Comparable<T>> {
 	private T[] pq;
 	private int n = 0;
+
+	public MinPQ(){
+		pq = (T[]) new Comparable[1000+1];
+	}
+
 	public MinPQ(int maxN) {
 		pq = (T[]) new Comparable[maxN+1];
+	}
+
+	public MinPQ(T[] a){
+		pq =  (T[]) new Comparable[a.length * 2+1];
+		for (T t : a) {
+			insert(t);
+		}
 	}
 
 	public boolean isEmpty() {
@@ -16,6 +28,10 @@ public class MinPQ<T extends Comparable<T>> {
 	public void insert(T v) {
 		pq[++n] = v;
 		swim(n);
+	}
+
+	public T min(){
+		return pq[1];
 	}
 
 	public T delMin() {
