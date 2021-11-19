@@ -1,3 +1,5 @@
+// Simple comparable class
+// Competitors are sorted by ranking
 public class Competitor implements Comparable<Competitor> {
 	int placing;
 	String name;

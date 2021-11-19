@@ -1,15 +1,16 @@
 public class MaxPQ<T extends Comparable<T>> {
-	private T[] pq; // heap-ordered complete binary tree
-	private int n = 0; // in pq[1..N] with pq[0] unused
+	private T[] pq;
+	private int n = 0;
 
 	public MaxPQ(){
-		pq = (T[]) new Comparable[1000+1]; // default size 1000
+		pq = (T[]) new Comparable[1000+1]; // default size 1001
 	}
 
 	public MaxPQ(int maxN) {
 		pq = (T[]) new Comparable[maxN+1];
 	}
 
+	// Takes an array an makes it into a Max Heap
 	public MaxPQ(T[] a){
 		pq =  (T[]) new Comparable[a.length * 2+1];
 		for (T t : a) {
@@ -25,15 +26,19 @@ public class MaxPQ<T extends Comparable<T>> {
 		return n;
 	}
 
+	// Inserts a node then swims it up to it's correct place
 	public void insert(T v) {
 		pq[++n] = v;
 		swim(n);
 	}
 
+	// returns root/max node
 	public T max(){
 		return pq[1];
 	}
 
+	// Deletes and returns root/max node
+	// Swaps it out of the effective space in the heap, then sinks the new node to the right place
 	public T delMax() {
 		T max = pq[1];
 		swap(1, n--);
@@ -52,6 +57,7 @@ public class MaxPQ<T extends Comparable<T>> {
 		pq[j] = tmp;
 	}
 
+	// Swims a node from a leaf to it's correct place
 	private void swim(int k) {
 		while(k >= 2 && less(k/2, k)){
 			swap(k/2, k);
@@ -59,6 +65,7 @@ public class MaxPQ<T extends Comparable<T>> {
 		}
 	}
 
+	// Swinks a node in the root position to it's correct place
 	private void sink(int k) {
 		while(2 * k < n+1 ){
 			int child = 2 * k;

@@ -1,3 +1,5 @@
+
+// QuickSort adapted from HW 1 w/ modification to extend comparable & support sort()
 public class QuickSort<T extends Comparable<T>> {
 
 	public QuickSort(){ // Constructor

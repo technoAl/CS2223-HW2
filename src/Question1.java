@@ -3,6 +3,9 @@ import java.util.stream.IntStream;
 
 public class Question1 {
 	public static void main(String[] args) {
+
+		// Verification of Functionality
+
 		MinPQ<Integer> minPQ = new MinPQ<>(generate(1000, 1000));
 		MaxPQ<Integer> maxPQ = new MaxPQ<>(generate(1000, 1000));
 		MyStack<Integer> stack = new MyStack<>(1001);
@@ -11,6 +14,7 @@ public class Question1 {
 			stack.push(minPQ.delMin());
 		}
 
+		// Use stack to print
 		while(stack.size > 0){
 			System.out.print(stack.pop() + " ");
 		}
@@ -26,6 +30,8 @@ public class Question1 {
 
 		System.out.println();
 
+
+		// Verification for comparable type competitors
 		Competitor[] competitors = generateCompetitors(1000, 1000);
 		MinPQ<Competitor> minPQcomp = new MinPQ<>(competitors);
 		MaxPQ<Competitor> maxPQcomp = new MaxPQ<>(competitors);
@@ -60,6 +66,7 @@ public class Question1 {
 		return integers;
 	}
 
+	// Generates competitor arrays for testing
 	public static Competitor[] generateCompetitors(int n, int maxIntSize){
 		Integer[] gen = generate(n, maxIntSize);
 		Competitor[] comp = new Competitor[n];
